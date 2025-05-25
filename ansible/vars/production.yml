@@ -1,0 +1,5 @@
+env_name: production
+apache_port: 8083
+server_admin_email: webmaster@educacionit.com
+site_dir: /var/www/html/prod_ansible_site
+apache_log_dir: /var/log/apache2

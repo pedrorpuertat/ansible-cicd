@@ -1,0 +1,37 @@
+pipeline {
+    agent { label 'jenkins-server-jenkins-agent' }
+
+    environment {
+        ANSIBLE_PRIVATE_KEY = credentials('ansible-private-key') 
+        ANSIBLE_CONFIG = './ansible/ansible.cfg'
+    }
+
+    stages {
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    // Determinar el nombre de la rama y el inventario correspondiente
+                    def branch = env.BRANCH_NAME
+                    def inventoryFile = ""
+
+                    if (branch == "dev") {
+                        inventoryFile = "ansible/inventory/inventory_dev.ini"
+                    } else if (branch == "staging") {
+                        inventoryFile = "ansible/inventory/inventory_staging.ini"
+                    } else if (branch == "master") {
+                        inventoryFile = "ansible/inventory/inventory_master.ini"
+                    } else {
+                        error("Branch no soportada: ${branch}")
+                    }
+
+                    sh """
+                        ansible-playbook \
+                            -i ./ansible/${inventoryFile} \
+                            --private-key \$ANSIBLE_PRIVATE_KEY \
+                            ./ansible/main.yml
+                    """
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+env_name: dev
+apache_port: 8081
+server_admin_email: webmaster-dev@educacionit.com
+site_dir: /var/www/html/dev_ansible_site
+apache_log_dir: /var/log/apache2
