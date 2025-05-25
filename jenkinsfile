@@ -15,11 +15,11 @@ pipeline {
                     def inventoryFile = ""
 
                     if (branch == "dev") {
-                        inventoryFile = "ansible/inventory/inventory_dev.ini"
+                        inventoryFile = "inventory/inventory_dev.ini"
                     } else if (branch == "staging") {
-                        inventoryFile = "ansible/inventory/inventory_staging.ini"
+                        inventoryFile = "inventory/inventory_staging.ini"
                     } else if (branch == "master") {
-                        inventoryFile = "ansible/inventory/inventory_master.ini"
+                        inventoryFile = "inventory/inventory_master.ini"
                     } else {
                         error("Branch no soportada: ${branch}")
                     }
@@ -28,7 +28,7 @@ pipeline {
                         ansible-playbook \
                             -i ./ansible/${inventoryFile} \
                             --private-key \$ANSIBLE_PRIVATE_KEY \
-                            ./ansible/main.yml
+                            ./ansible/mail.yml
                     """
                 }
             }
