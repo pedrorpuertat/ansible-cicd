@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jenkins-server-jenkins-agent' } 
+    agent any
 
     environment {
         ANSIBLE_PRIVATE_KEY = credentials('ansible-private-key') 
