@@ -1,0 +1,5 @@
+env_name: staging
+apache_port: 8082
+server_admin_email: webmaster-staging@educacionit.com
+site_dir: /var/www/html/staging_ansible_site
+apache_log_dir: /var/log/apache2
